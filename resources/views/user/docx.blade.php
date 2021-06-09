@@ -62,19 +62,22 @@
         <div class="form__wrapper">
             <h2>Список редактируемых документов:</h2>
             <ul class="tab-block">
-                <li><button type="button" onclick="open_popup('#')">Сделать Протокол заседания</button></li>
                 <li><button type="button" onclick="open_popup('#WorkPlan')">План работы УИК в период проведения выборов</button></li>
                 <li><button type="button" onclick="open_popup('#PlanSolution')">Решение о плане работы</button></li>
                 <li><button type="button" onclick="open_popup('#FireInstruction')">Инструкция о мерах пожарной безопасности на избирательном участке</button></li>
                 <li><button type="button" onclick="open_popup('#List_oznakomleniya_c_pravilami_pojarnoi_bezopacnocti')">Лист ознакомления с правилами пожарной безопасности</button></li>
-
-
                 <li><button type="button" onclick="open_popup('#List_oznakomleniya_c_protokolom_and_resheniyami')">Лист ознакомления с протоколом и решениями</button></li>
                 <li><button type="button" onclick="open_popup('#VotingCountVotesPersonsList')">СПИСОК лиц, присутствовавших при проведении голосования, подсчете голосов избирателей</button></li>
 
+                <li><button type="button" onclick="open_popup('#Telephone_message_log')">Журнал регистрации телефонограмм</button></li>
+                <li><button type="button" onclick="open_popup('#Register_of_applications_appeals_for_voting_outside_the_voting_premises')">РЕЕСТР заявлений (обращений) о голосовании вне помещения для голосования</button></li>
+                <li><button type="button" onclick="open_popup('#Register_registration_issuance_certified_copies')">РЕЕСТР регистрации выдачи заверенных копий протокола участковой избирательной комиссии об итогах голосования по выборам</button></li>
+                <li><button type="button" onclick="open_popup('#Log_of_registration_of_PEC_decisions')">Журнал регистрации решений УИК</button></li>
+                <li><button type="button" onclick="open_popup('#Log_of_incoming_documents')">Журнал регистрации входящих документов</button></li>
+                <li><button type="button" onclick="open_popup('#Log_of_outgoing_PEC_documents_registration')">Журнала регистрации исходящих документов УИК</button></li>
+
                 <li><button type="button" onclick="open_popup('#EquipmentSolution')">Решение о схеме размещения оборудования</button></li>
                 <li><button type="button" onclick="open_popup('#ApplicationLog')">Журнал заявлений</button></li>
-                <li><button type="button" onclick="open_popup('#')">Сделать Пустой протокол</button></li>
             </ul>
         </div>
 
@@ -168,10 +171,21 @@
         @include('forms.WorkPlan')
         @include('forms.EquipmentSolution')
         @include('forms.PlanSolution')
+        @include('forms.TelephoneMessageLog')
+        @include('forms.Register_of_applications_(appeals)_for_voting_outside_the_voting_premises')
+        @include('forms.Register_of_registration_issuance_of_certified_copies_of_the_protocol_of_the_precinct_election_commission_on_the_results_of_voting_on_elections')
+        @include('forms.Log_of_registration_of_PEC_decisions')
+        @include('forms.Log_incoming_documents')
+        @include('forms.Log_of_outgoing_PEC_documents_registration')
         <datalist id="WorkersDatalist">
         @foreach($voting->workers as $worker)
         <option value="{{$worker->name}}">{{$worker->name}}</option>
         @endforeach
+        </datalist>
+        <datalist id="MainWorkers">
+            @foreach($main_workers as $worker)
+                <option value="{{$worker}}">{{$worker}}</option>
+            @endforeach
         </datalist>
     </div>
 </main>

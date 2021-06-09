@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\LogRegistrationDecision;
+use App\RegisterRegistrationIssuanceCertifiedCopy;
 use Illuminate\Http\Request;
 use PhpOffice\PhpWord\TemplateProcessor;
 use App\Voting;
@@ -14,6 +16,10 @@ use App\FireSafetyInstruction;
 use App\ProtocolAndDecisionReviewSheet;
 use App\FireSafetyInformationSheet;
 use App\VotingCountVotesPersonsList;
+use App\RegisterApplicationsAppealsForVoting;
+use App\TelephoneMessageLog;
+use App\LogIncomingDocument;
+use App\LogOutgoingPECDocumentsRegistration;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\UploadedFile;
@@ -110,10 +116,249 @@ class DocumentController extends Controller
             $zip->addFile($file[1],'required_documents/'.$file[0]);
             $file = $this->create_List_of_persons_present_during_the_voting_counting_of_votes($id);
             $zip->addFile($file[1],'required_documents/'.$file[0]);
+            $file = $this->create_Telephone_message_log($id);
+            $zip->addFile($file[1],'required_documents/'.$file[0]);
+            $file = $this->create_Statement_of_the_transfe_of_ballots_to_the_members($id);
+            $zip->addFile($file[1],'required_documents/'.$file[0]);
+            $file = $this->create_Register_of_applications_appeals_for_voting_outside_the_voting_premises($id);
+            $zip->addFile($file[1],'required_documents/'.$file[0]);
+            $file = $this->create_Register_registration_issuance_certified_copies($id);
+            $zip->addFile($file[1],'required_documents/'.$file[0]);
+            $file = $this->create_Log_of_registration_of_PEC_decisions($id);
+            $zip->addFile($file[1],'required_documents/'.$file[0]);
+            $file = $this->create_Log_of_incoming_documents($id);
+            $zip->addFile($file[1],'required_documents/'.$file[0]);
+            $file = $this->create_Log_of_outgoing_PEC_documents_registration($id);
+            $zip->addFile($file[1],'required_documents/'.$file[0]);
             $zip->close();
         }
 
         return response()->download(public_path($zip_name))->deleteFileAfterSend(true);
+    }
+
+    public function create_Log_of_outgoing_PEC_documents_registration($id){
+        $file = array('Журнала регистрации исходящих документов УИК.docx','download_documents/required_documents/Журнала регистрации исходящих документов УИК.docx');
+
+        $log_outgoing_documents=LogOutgoingPECDocumentsRegistration::where('voting_id',$id)->get();
+        $doc = new TemplateProcessor(public_path('documents/required_documents/Log_of_outgoing_PEC_documents_registration.docx'));
+
+        $values=array();
+        foreach($log_outgoing_documents as $log){
+            array_push($values,array(
+                'date'=>$log->date,
+                'number'=>$log->number,
+                'recipient'=>$log->recipient,
+                'summary_document'=>$log->summary_document,
+                'person_signed_doc'=>$log->person_signed_doc,
+                'executor'=>$log->executor,
+                'case'=>$log->case,
+            ));
+        }
+        $doc->cloneRowAndSetValues('number', $values);
+
+        $doc->saveAs($file[1]);
+        return $file;
+    }
+
+    public function create_Log_of_incoming_documents($id){
+        $file = array('Журнал регистрации входящих документов.docx','download_documents/required_documents/Журнал регистрации входящих документов.docx');
+
+        $log_incoming_documents=LogIncomingDocument::where('voting_id',$id)->get();
+        $doc = new TemplateProcessor(public_path('documents/required_documents/Log_of_incoming_documents.docx'));
+
+        $values=array();
+        foreach($log_incoming_documents as $log){
+            array_push($values,array(
+                'date_receipt'=>$log->date_receipt,
+                'number'=>$log->number,
+                'correspondent'=>$log->correspondent,
+                'number_doc'=>$log->number_doc,
+                'date_doc'=>$log->date_doc,
+                'content'=>$log->content,
+                'resolution'=>$log->resolution,
+                'executer'=>$log->executer,
+                'term_start'=>$log->term_start,
+                'term_end'=>$log->term_end,
+                'mark'=>$log->mark,
+                'case'=>$log->case,
+            ));
+        }
+        $doc->cloneRowAndSetValues('number', $values);
+
+        $doc->saveAs($file[1]);
+        return $file;
+    }
+
+    public function create_Log_of_registration_of_PEC_decisions($id){
+        $file = array('Журнал регистрации решений УИК.docx','download_documents/required_documents/Журнал регистрации решений УИК.docx');
+
+        $log_registration_decisions=LogRegistrationDecision::where('voting_id',$id)->get();
+        $doc = new TemplateProcessor(public_path('documents/required_documents/Log_of_registration_of_PEC_decisions.docx'));
+
+        $values=array();
+        foreach($log_registration_decisions as $log){
+            array_push($values,array(
+                'date'=>$log->date,
+                'number'=>$log->number,
+                'name'=>$log->name,
+                'number_sheets_decisions'=>$log->number_sheets_decisions,
+                'number_sheets_applications'=>$log->number_sheets_applications,
+                'executor'=>$log->executor,
+                'note'=>$log->note,
+            ));
+        }
+        $doc->cloneRowAndSetValues('number', $values);
+
+        $doc->saveAs($file[1]);
+        return $file;
+    }
+
+    public function create_Register_registration_issuance_certified_copies($id){
+        $file = array('РЕЕСТР регистрации выдачи заверенных копий протокола участковой избирательной комиссии об итогах голосования по выборам.docx','download_documents/required_documents/РЕЕСТР регистрации выдачи заверенных копий протокола участковой избирательной комиссии об итогах голосования по выборам.docx');
+
+        $voting=Voting::find($id);
+        $registers=RegisterRegistrationIssuanceCertifiedCopy::where('voting_id',$id)->get();
+        $doc = new TemplateProcessor(public_path('documents/required_documents/Register_of_registration_issuance_of_certified_copies_of_the_protocol_of_the_precinct_election_commission_on_the_results_of_voting_on_elections.docx'));
+
+        $chairman=$voting->workers->where('worker_type_id',1)->first()->name;
+        $chairman_name="";
+        if($chairman){
+            $chairman=explode(" ",$chairman);
+            for($i=1;$i<count($chairman);$i++){
+                $chairman_name.=mb_substr($chairman[$i],0,1,"UTF-8").". ";
+            }
+            $chairman_name.=$chairman[0];
+        }
+        $secretary=Voting::with('workers')->find($id)->workers->where('worker_type_id',3)->first()->name;
+        $secretary_name="";
+        if($secretary){
+            $secretary=explode(" ",$secretary);
+            for($i=1;$i<count($secretary);$i++){
+                $secretary_name.=mb_substr($secretary[$i],0,1,"UTF-8").". ";
+            }
+            $secretary_name.=$secretary[0];
+        }
+
+        $values=array();
+        foreach($registers as $log){
+            array_push($values,array(
+                'number'=>$log->number,
+                'person_accepted_protocol'=>$log->person_accepted_protocol,
+                'person_accepted_protocol_status'=>$log->person_accepted_protocol_status,
+                'personal_assured_name'=>$log->personal_assured_name,
+                'datetime_issuing'=>$log->datetime_issuing,
+                'telephone'=>$log->telephone,
+            ));
+        }
+        $doc->cloneRowAndSetValues('number', $values);
+        $doc->setValue('plot',$voting->plot_number);
+        $doc->setValue('voting_type',$voting->voting_type->name);
+        $doc->setValue('secretary',$secretary_name);
+        $doc->setValue('chairman',$chairman_name);
+
+        $doc->saveAs($file[1]);
+        return $file;
+    }
+
+    public function create_Register_of_applications_appeals_for_voting_outside_the_voting_premises($id){
+        $file = array('РЕЕСТР заявлений (обращений) о голосовании вне помещения для голосования.docx','download_documents/required_documents/РЕЕСТР заявлений (обращений) о голосовании вне помещения для голосования.docx');
+        $voting=Voting::find($id);
+        $registers=RegisterApplicationsAppealsForVoting::where('voting_id',$id)->get();
+        $doc = new TemplateProcessor(public_path('documents/required_documents/Register_of_applications_(appeals)_for_voting_outside_the_voting_premises.docx'));
+
+        $chairman=$voting->workers->where('worker_type_id',1)->first()->name;
+        $chairman_name="";
+        if($chairman){
+            $chairman=explode(" ",$chairman);
+            for($i=1;$i<count($chairman);$i++){
+                $chairman_name.=mb_substr($chairman[$i],0,1,"UTF-8").". ";
+            }
+            $chairman_name.=$chairman[0];
+        }
+        $secretary=Voting::with('workers')->find($id)->workers->where('worker_type_id',3)->first()->name;
+        $secretary_name="";
+        if($secretary){
+            $secretary=explode(" ",$secretary);
+            for($i=1;$i<count($secretary);$i++){
+                $secretary_name.=mb_substr($secretary[$i],0,1,"UTF-8").". ";
+            }
+            $secretary_name.=$secretary[0];
+        }
+
+        $values=array();
+        foreach($registers as $log){
+            array_push($values,array(
+                'voter_name'=>$log->voter_name,
+                'voter_address'=>$log->voter_address,
+                'reason_calling_commission'=>$log->reason_calling_commission,
+                'datetime_oral_appeal'=>$log->datetime_oral_appeal,
+                'datetime_written_appeal'=>$log->datetime_written_appeal,
+                'name_transmitting_appeal'=>$log->name_transmitting_appeal,
+                'address_transmitting_appeal'=>$log->address_transmitting_appeal,
+                'name_accepted_appeal'=>$log->name_accepted_appeal,
+                'null'=>null,
+            ));
+        }
+        $doc->cloneRowAndSetValues('voter_name', $values);
+        $doc->setValue('plot',$voting->plot_number);
+        $doc->setValue('secretary',$secretary_name);
+        $doc->setValue('chairman',$chairman_name);
+
+        $doc->saveAs($file[1]);
+        return $file;
+    }
+
+    public function create_Statement_of_the_transfe_of_ballots_to_the_members($id){
+        $file = array('ВЕДОМОСТЬ передачи избирательных бюллетеней членам УИК для выдачи их избирателям.docx','download_documents/required_documents/ВЕДОМОСТЬ передачи избирательных бюллетеней членам УИК для выдачи их избирателям.docx');
+        $voting=Voting::find($id);
+        $chairman=$voting->workers->where('worker_type_id',1)->first()->name;
+        $chairman_name="";
+        if($chairman){
+            $chairman=explode(" ",$chairman);
+            for($i=1;$i<count($chairman);$i++){
+                $chairman_name.=mb_substr($chairman[$i],0,1,"UTF-8").". ";
+            }
+            $chairman_name.=$chairman[0];
+        }
+        $secretary=Voting::with('workers')->find($id)->workers->where('worker_type_id',3)->first()->name;
+        $secretary_name="";
+        if($secretary){
+            $secretary=explode(" ",$secretary);
+            for($i=1;$i<count($secretary);$i++){
+                $secretary_name.=mb_substr($secretary[$i],0,1,"UTF-8").". ";
+            }
+            $secretary_name.=$secretary[0];
+        }
+        $doc = new TemplateProcessor(public_path('documents/required_documents/Statement_of_the_transfe_of_ballots_to_the_members.docx'));
+        $doc->setValue('secretary',$secretary_name);
+        $doc->setValue('chairman',$chairman_name);
+        $doc->saveAs($file[1]);
+        return $file;
+    }
+
+    public function create_Telephone_message_log($id){
+        $file = array('Журнал регистрации телефонограмм.docx','download_documents/required_documents/Журнал регистрации телефонограмм.docx');
+
+        $telephone_message_log=TelephoneMessageLog::where('voting_id',$id)->get();
+        $doc = new TemplateProcessor(public_path('documents/required_documents/Telephone_message_log.docx'));
+
+        $values=array();
+        foreach($telephone_message_log as $log){
+            array_push($values,array(
+                'number'=>$log->number,
+                'date'=>$log->date,
+                'person_transmitting'=>$log->person_transmitting,
+                'person_transmitting_status'=>$log->person_transmitting_status,
+                'person_adopted'=>$log->person_adopted,
+                'person_adopted_status'=>$log->person_adopted_status,
+                'content'=>$log->content,
+                'note'=>$log->note,
+            ));
+        }
+        $doc->cloneRowAndSetValues('number', $values);
+
+        $doc->saveAs($file[1]);
+        return $file;
     }
 
     public function create_List_of_persons_present_during_the_voting_counting_of_votes($id){
