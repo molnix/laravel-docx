@@ -17,8 +17,11 @@ use App\Http\Controllers\TelephoneMessageLogController;
 use App\Http\Controllers\RegisterApplicationsAppealsForVotingController;
 use App\Http\Controllers\RegisterRegistrationIssuanceCertifiedCopyController;
 use App\Http\Controllers\LogRegistrationDecisionController;
+<<<<<<< HEAD
 use App\Http\Controllers\LogIncomingDocumentController;
 use App\Http\Controllers\LogOutgoingPECDocumentsRegistrationController;
+=======
+>>>>>>> 424386cfa9fc2585fd7fa33671fe4f14418ecbed
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -87,12 +90,15 @@ Route::middleware('auth')->group(function (){
         Route::post('/profile/voting/{id}/create/Log_of_registration_of_PEC_decisions',[LogRegistrationDecisionController::class,'create'])->name('create_Log_of_registration_of_PEC_decisions');
         Route::get('/profile/voting/{id}/download/Log_of_registration_of_PEC_decisions',[LogRegistrationDecisionController::class,'download'])->name('download_Log_of_registration_of_PEC_decisions');
 
+<<<<<<< HEAD
         Route::post('/profile/voting/{id}/create/Log_of_incoming_documents',[LogIncomingDocumentController::class,'create'])->name('create_Log_of_incoming_documents');
         Route::get('/profile/voting/{id}/download/Log_of_incoming_documents',[LogIncomingDocumentController::class,'download'])->name('download_Log_of_incoming_documents');
 
         Route::post('/profile/voting/{id}/create/Log_of_outgoing_PEC_documents_registration',[LogOutgoingPECDocumentsRegistrationController::class,'create'])->name('create_Log_of_outgoing_PEC_documents_registration');
         Route::get('/profile/voting/{id}/download/Log_of_outgoing_PEC_documents_registration',[LogOutgoingPECDocumentsRegistrationController::class,'download'])->name('download_Log_of_outgoing_PEC_documents_registration');
 
+=======
+>>>>>>> 424386cfa9fc2585fd7fa33671fe4f14418ecbed
     });
 
 });

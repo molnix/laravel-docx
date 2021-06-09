@@ -18,8 +18,11 @@ use App\FireSafetyInformationSheet;
 use App\VotingCountVotesPersonsList;
 use App\RegisterApplicationsAppealsForVoting;
 use App\TelephoneMessageLog;
+<<<<<<< HEAD
 use App\LogIncomingDocument;
 use App\LogOutgoingPECDocumentsRegistration;
+=======
+>>>>>>> 424386cfa9fc2585fd7fa33671fe4f14418ecbed
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\UploadedFile;
@@ -126,16 +129,20 @@ class DocumentController extends Controller
             $zip->addFile($file[1],'required_documents/'.$file[0]);
             $file = $this->create_Log_of_registration_of_PEC_decisions($id);
             $zip->addFile($file[1],'required_documents/'.$file[0]);
+<<<<<<< HEAD
             $file = $this->create_Log_of_incoming_documents($id);
             $zip->addFile($file[1],'required_documents/'.$file[0]);
             $file = $this->create_Log_of_outgoing_PEC_documents_registration($id);
             $zip->addFile($file[1],'required_documents/'.$file[0]);
+=======
+>>>>>>> 424386cfa9fc2585fd7fa33671fe4f14418ecbed
             $zip->close();
         }
 
         return response()->download(public_path($zip_name))->deleteFileAfterSend(true);
     }
 
+<<<<<<< HEAD
     public function create_Log_of_outgoing_PEC_documents_registration($id){
         $file = array('Журнала регистрации исходящих документов УИК.docx','download_documents/required_documents/Журнала регистрации исходящих документов УИК.docx');
 
@@ -189,6 +196,8 @@ class DocumentController extends Controller
         return $file;
     }
 
+=======
+>>>>>>> 424386cfa9fc2585fd7fa33671fe4f14418ecbed
     public function create_Log_of_registration_of_PEC_decisions($id){
         $file = array('Журнал регистрации решений УИК.docx','download_documents/required_documents/Журнал регистрации решений УИК.docx');
 

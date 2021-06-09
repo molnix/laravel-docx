@@ -65,6 +65,7 @@ $(document).ready(function (){
     $("#Delete_Log_of_registration_of_PEC_decisions_Btn").click(function(){
         $(".Log_of_registration_of_PEC_decisions_inputs:last-child").remove();
     });
+<<<<<<< HEAD
 
     $("#Create_Log_of_incoming_documents_Btn").click(function(){
         $("#Log_of_incoming_documents_table").append('<tr class="Log_of_incoming_documents_inputs"><td><input type="date" name="date_receipt[]"></td><td><input type="text" name="number[]"></td><td><input type="text" name="correspondent[]"></td><td><input type="text" name="number_doc[]"></td><td><input type="date" name="date_doc[]"></td><td><input type="text" name="content[]"></td><td><input type="text" name="resolution[]"></td><td><input type="text" name="executer[]"></td><td><input type="date" name="term_start[]"></td><td><input type="date" name="term_end[]"></td><td><input type="text" name="mark[]"></td><td><input type="text" name="case[]"></td>   <td><button class="btn-danger-table" type="button" onclick="$(this).closest('+"'.Log_of_incoming_documents_inputs'"+').remove();">Удалить строку</button></td></tr>');
@@ -79,6 +80,8 @@ $(document).ready(function (){
     $("#Delete_Log_of_outgoing_PEC_documents_registration_Btn").click(function(){
         $(".Log_of_outgoing_PEC_documents_registration_inputs:last-child").remove();
     });
+=======
+>>>>>>> 424386cfa9fc2585fd7fa33671fe4f14418ecbed
 });
 function open_popup(id){
     $(id).css({
