@@ -2,7 +2,7 @@ $(document).ready(function (){
     $('#files-input').on('change', function(){
         $('#count-input-files').html("Файлов выбранно: "+this.files.length);
     });
-    
+
     $( "#CreateInputBtn" ).click(function() {
         $('#WorkersList').append("<div class='input-worker'> Сотрудник:</br> <input type='text' name='workers[]'></br> Место работы:</br> <input type='text' name='workers_workplace[]'></br> <button class='btn-list-danger' type='button' onclick='$(this).parent().remove();'>Удалить поле</button> </div>");
     });
@@ -36,6 +36,34 @@ $(document).ready(function (){
     });
     $("#DeleteVotingCountVotesPersonsListBtn").click(function(){
         $(".voting_count_votes_persons_list_inputs:last-child").remove();
+    });
+
+    $("#Create_Telephone_message_log_Btn").click(function(){
+        $("#Telephone_message_log_table").append('<tr class="Telephone_message_log_inputs"> <td><input type="text" name="number[]"></td><td><input type="datetime-local" name="date[]"></td><td><input type="text" name="person_transmitting[]" placeholder="В. В. Фамилия" list="WorkersDatalist" autocomplete="no"></td><td><input type="text" name="person_transmitting_status[]"></td><td><input type="text" name="person_adopted[]" placeholder="В. В. Фамилия" list="WorkersDatalist" autocomplete="no"></td><td><input type="text" name="person_adopted_status[]"></td><td><input type="text" name="content[]"></td><td><input type="text" name="note[]"></td>   <td><button class="btn-danger-table" type="button" onclick="$(this).closest('+"'.Telephone_message_log_inputs'"+').remove();">Удалить строку</button></td></tr>');
+    });
+    $("#Delete_Telephone_message_log_Btn").click(function(){
+        $(".Telephone_message_log_inputs:last-child").remove();
+    });
+
+    $("#Create_Register_of_applications_appeals_for_voting_outside_the_voting_premises_Btn").click(function(){
+        $("#Register_of_applications_appeals_for_voting_outside_the_voting_premises_table").append('<tr class="Register_of_applications_appeals_for_voting_outside_the_voting_premises_inputs"><td><input type="text" name="voter_name[]" placeholder="Фамилия Имя Отчество"></td><td><input type="text" name="voter_address[]"></td><td><input type="text" name="reason_calling_commission[]"></td><td><input type="datetime-local" name="datetime_oral_appeal[]"></td><td><input type="datetime-local" name="datetime_written_appeal[]"></td><td><input type="text" name="name_transmitting_appeal[]" placeholder="Фамилия Имя Отчество"></td><td><input type="text" name="address_transmitting_appeal[]"></td><td><input type="text" name="name_accepted_appeal[]" placeholder="Фамилия Имя Отчество" list="WorkersDatalist"></td>   <td><button class="btn-danger-table" type="button" onclick="$(this).closest('+"'.Register_of_applications_appeals_for_voting_outside_the_voting_premises_inputs'"+').remove();">Удалить строку</button></td></tr>');
+    });
+    $("#Delete_Register_of_applications_appeals_for_voting_outside_the_voting_premises_Btn").click(function(){
+        $(".Register_of_applications_appeals_for_voting_outside_the_voting_premises_inputs:last-child").remove();
+    });
+
+    $("#Create_Register_registration_issuance_certified_copies_Btn").click(function(){
+        $("#Register_registration_issuance_certified_copies_table").append('<tr class="Register_registration_issuance_certified_copies_inputs"><td><input type="text" name="number[]"></td><td><input type="text" name="person_accepted_protocol[]" placeholder="Фамилия Имя Отчество"></td><td><input type="text" name="person_accepted_protocol_status[]"></td><td><input type="text" name="personal_assured_name[]" placeholder="И. О. Фамилия" list="MainWorkers" autocomplete="no"></td><td><input type="datetime-local" name="datetime_issuing[]"></td><td><input type="text" name="telephone[]"></td>   <td><button class="btn-danger-table" type="button" onclick="$(this).closest('+"'.Register_registration_issuance_certified_copies_inputs'"+').remove();">Удалить строку</button></td></tr>');
+    });
+    $("#Delete_Register_registration_issuance_certified_copies_Btn").click(function(){
+        $(".Register_registration_issuance_certified_copies_inputs:last-child").remove();
+    });
+
+    $("#Create_Log_of_registration_of_PEC_decisions_Btn").click(function(){
+        $("#Log_of_registration_of_PEC_decisions_table").append('<tr class="Log_of_registration_of_PEC_decisions_inputs"><td><input type="date" name="date[]"></td><td><input type="text" name="number[]"></td><td><input type="text" name="name[]"></td><td><input type="text" name="number_sheets_decisions[]"></td><td><input type="text" name="number_sheets_applications[]"></td><td><input type="text" name="executor[]"></td><td><input type="text" name="note[]"></td>   <td><button class="btn-danger-table" type="button" onclick="$(this).closest('+"'.Log_of_registration_of_PEC_decisions_inputs'"+').remove();">Удалить строку</button></td></tr>');
+    });
+    $("#Delete_Log_of_registration_of_PEC_decisions_Btn").click(function(){
+        $(".Log_of_registration_of_PEC_decisions_inputs:last-child").remove();
     });
 });
 function open_popup(id){

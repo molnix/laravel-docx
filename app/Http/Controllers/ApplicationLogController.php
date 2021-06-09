@@ -19,7 +19,7 @@ class ApplicationLogController extends Controller
             ApplicationLogData::where('application_log_id',$application_log->id)->delete();
             $application_log->delete();
         }
-        
+
         $application_log=ApplicationLog::create([
             'voting_id'=>$id,
             'date'=>$request['main_date'],
@@ -51,7 +51,7 @@ class ApplicationLogController extends Controller
         $doc->setValue('plot',$voting->plot_number);
         $values=array();
         foreach($application_logs->application_log_data as $application_log){
-            arraY_push($values,array(
+            array_push($values,array(
                 'number'=>$application_log->number,
                 'date'=>$application_log->date,
                 'time'=>$application_log->time,
