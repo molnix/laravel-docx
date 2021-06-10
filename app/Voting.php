@@ -8,6 +8,7 @@ class Voting extends Model
 {
     protected $fillable = [
         'plot_number',
+        'voting_day',
         'voting_type_id',
     ];
 

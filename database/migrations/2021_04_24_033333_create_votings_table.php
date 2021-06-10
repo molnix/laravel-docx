@@ -17,6 +17,7 @@ class CreateVotingsTable extends Migration
             $table->id();
             $table->integer('plot_number')->nullable();
             $table->integer('voting_type_id')->nullable();
+            $table->string('voting_day')->nullable();
             $table->timestamps();
         });
     }

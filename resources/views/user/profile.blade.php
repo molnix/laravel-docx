@@ -35,6 +35,10 @@
             <input id="plot_number" type="number" name="plot_number">
         </div>
         <div class="fields">
+            <p><label for="voting_day">День голосования:</label></br>
+            <input id="voting_day" type="text" name="voting_day"></p>
+        </div>
+        <div class="fields">
             <label for="chairman">Председатель:</label></br>
             <input type="text" name="chairman"></br>
             <label for="chairman_workplace">Место работы:</label></br>

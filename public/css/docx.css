@@ -152,6 +152,12 @@ input[type=date]{
     border: 1px solid black;
     border-radius: 0;
 }
+input[type=datetime-local]{
+    height: 30px;
+    padding: 0 5px;
+    border: 1px solid black;
+    border-radius: 0;
+}
 input:focus {
     border: 1px solid #001EE3;
     outline:0;
