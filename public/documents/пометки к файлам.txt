@@ -2,17 +2,36 @@
 документы сверху вниз по списку
 
 Сделать доки:
+<<<<<<< HEAD
 
 
+=======
+Шаблон протокола зеседания Meeting_minutes_template
+2. Повестка, протокол, решения Agenda_minutes_decisions
+
+<<<<<<< HEAD
+>>>>>>> 9f4a4572bc5a7fa36639a31fc7fc3e560b1dad4b
 
 
 
 Сделанные доки:
+<<<<<<< HEAD
 2. Повестка, протокол, решения Agenda_minutes_decisions
 Шаблон протокола зеседания Meeting_minutes_template
 
 Журнала регистрации исходящих документов УИК Log_of_outgoing_PEC_documents_registration
 Журнал регистрации входящих документов Log_of_incoming_documents
+=======
+Журнала регистрации исходящих документов УИК Log_of_outgoing_PEC_documents_registration
+Журнал регистрации входящих документов Log_of_incoming_documents
+=======
+Журнала регистрации исходящих документов УИК Log_of_outgoing_PEC_documents_registration
+
+Журнал регистрации входящих документов Log_of_incoming_documents
+
+Сделанные доки:
+>>>>>>> 424386cfa9fc2585fd7fa33671fe4f14418ecbed
+>>>>>>> 9f4a4572bc5a7fa36639a31fc7fc3e560b1dad4b
 Журнал регистрации решений УИК Log_of_registration_of_PEC_decisions
 РЕЕСТР регистрации выдачи заверенных копий протокола участковой избирательной комиссии об итогах голосования по выборам Register_of_registration_issuance_of_certified_copies_of_the_protocol_of_the_precinct_election_commission_on_the_results_of_voting_on_elections
 РЕЕСТР заявлений (обращений) о голосовании вне помещения для голосования. docx Register_of_applications_(appeals)_for_voting_outside_the_voting_premises

@@ -18,8 +18,16 @@ use App\FireSafetyInformationSheet;
 use App\VotingCountVotesPersonsList;
 use App\RegisterApplicationsAppealsForVoting;
 use App\TelephoneMessageLog;
+<<<<<<< HEAD
 use App\LogIncomingDocument;
 use App\LogOutgoingPECDocumentsRegistration;
+=======
+<<<<<<< HEAD
+use App\LogIncomingDocument;
+use App\LogOutgoingPECDocumentsRegistration;
+=======
+>>>>>>> 424386cfa9fc2585fd7fa33671fe4f14418ecbed
+>>>>>>> 9f4a4572bc5a7fa36639a31fc7fc3e560b1dad4b
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\UploadedFile;
@@ -126,20 +134,30 @@ class DocumentController extends Controller
             $zip->addFile($file[1],'required_documents/'.$file[0]);
             $file = $this->create_Log_of_registration_of_PEC_decisions($id);
             $zip->addFile($file[1],'required_documents/'.$file[0]);
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9f4a4572bc5a7fa36639a31fc7fc3e560b1dad4b
             $file = $this->create_Log_of_incoming_documents($id);
             $zip->addFile($file[1],'required_documents/'.$file[0]);
             $file = $this->create_Log_of_outgoing_PEC_documents_registration($id);
             $zip->addFile($file[1],'required_documents/'.$file[0]);
+<<<<<<< HEAD
             $file = $this->create_Meeting_minutes_template($id);
             $zip->addFile($file[1],'required_documents/'.$file[0]);
             $file = $this->create_Agenda_minutes_decisions($id);
             $zip->addFile($file[1],'required_documents/'.$file[0]);
+=======
+=======
+>>>>>>> 424386cfa9fc2585fd7fa33671fe4f14418ecbed
+>>>>>>> 9f4a4572bc5a7fa36639a31fc7fc3e560b1dad4b
             $zip->close();
         }
 
         return response()->download(public_path($zip_name))->deleteFileAfterSend(true);
     }
 
+<<<<<<< HEAD
     public function create_Agenda_minutes_decisions($id){
         $file = array('2. Повестка, протокол, решения.docx','download_documents/required_documents/2. Повестка, протокол, решения.docx');
 
@@ -225,6 +243,9 @@ class DocumentController extends Controller
         return $file;
     }
 
+=======
+<<<<<<< HEAD
+>>>>>>> 9f4a4572bc5a7fa36639a31fc7fc3e560b1dad4b
     public function create_Log_of_outgoing_PEC_documents_registration($id){
         $file = array('Журнала регистрации исходящих документов УИК.docx','download_documents/required_documents/Журнала регистрации исходящих документов УИК.docx');
 
@@ -278,6 +299,11 @@ class DocumentController extends Controller
         return $file;
     }
 
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 424386cfa9fc2585fd7fa33671fe4f14418ecbed
+>>>>>>> 9f4a4572bc5a7fa36639a31fc7fc3e560b1dad4b
     public function create_Log_of_registration_of_PEC_decisions($id){
         $file = array('Журнал регистрации решений УИК.docx','download_documents/required_documents/Журнал регистрации решений УИК.docx');
 

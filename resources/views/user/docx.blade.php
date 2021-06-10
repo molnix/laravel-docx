@@ -73,8 +73,16 @@
                 <li><button type="button" onclick="open_popup('#Register_of_applications_appeals_for_voting_outside_the_voting_premises')">РЕЕСТР заявлений (обращений) о голосовании вне помещения для голосования</button></li>
                 <li><button type="button" onclick="open_popup('#Register_registration_issuance_certified_copies')">РЕЕСТР регистрации выдачи заверенных копий протокола участковой избирательной комиссии об итогах голосования по выборам</button></li>
                 <li><button type="button" onclick="open_popup('#Log_of_registration_of_PEC_decisions')">Журнал регистрации решений УИК</button></li>
+<<<<<<< HEAD
                 <li><button type="button" onclick="open_popup('#Log_of_incoming_documents')">Журнал регистрации входящих документов</button></li>
                 <li><button type="button" onclick="open_popup('#Log_of_outgoing_PEC_documents_registration')">Журнала регистрации исходящих документов УИК</button></li>
+=======
+<<<<<<< HEAD
+                <li><button type="button" onclick="open_popup('#Log_of_incoming_documents')">Журнал регистрации входящих документов</button></li>
+                <li><button type="button" onclick="open_popup('#Log_of_outgoing_PEC_documents_registration')">Журнала регистрации исходящих документов УИК</button></li>
+=======
+>>>>>>> 424386cfa9fc2585fd7fa33671fe4f14418ecbed
+>>>>>>> 9f4a4572bc5a7fa36639a31fc7fc3e560b1dad4b
 
                 <li><button type="button" onclick="open_popup('#EquipmentSolution')">Решение о схеме размещения оборудования</button></li>
                 <li><button type="button" onclick="open_popup('#ApplicationLog')">Журнал заявлений</button></li>
@@ -179,8 +187,16 @@
         @include('forms.Register_of_applications_(appeals)_for_voting_outside_the_voting_premises')
         @include('forms.Register_of_registration_issuance_of_certified_copies_of_the_protocol_of_the_precinct_election_commission_on_the_results_of_voting_on_elections')
         @include('forms.Log_of_registration_of_PEC_decisions')
+<<<<<<< HEAD
         @include('forms.Log_incoming_documents')
         @include('forms.Log_of_outgoing_PEC_documents_registration')
+=======
+<<<<<<< HEAD
+        @include('forms.Log_incoming_documents')
+        @include('forms.Log_of_outgoing_PEC_documents_registration')
+=======
+>>>>>>> 424386cfa9fc2585fd7fa33671fe4f14418ecbed
+>>>>>>> 9f4a4572bc5a7fa36639a31fc7fc3e560b1dad4b
         <datalist id="WorkersDatalist">
         @foreach($voting->workers as $worker)
         <option value="{{$worker->name}}">{{$worker->name}}</option>

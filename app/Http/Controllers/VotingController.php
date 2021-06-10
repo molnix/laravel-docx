@@ -20,8 +20,16 @@ use App\TelephoneMessageLog;
 use App\RegisterApplicationsAppealsForVoting;
 use App\RegisterRegistrationIssuanceCertifiedCopy;
 use App\LogRegistrationDecision;
+<<<<<<< HEAD
 use App\LogIncomingDocument;
 use App\LogOutgoingPECDocumentsRegistration;
+=======
+<<<<<<< HEAD
+use App\LogIncomingDocument;
+use App\LogOutgoingPECDocumentsRegistration;
+=======
+>>>>>>> 424386cfa9fc2585fd7fa33671fe4f14418ecbed
+>>>>>>> 9f4a4572bc5a7fa36639a31fc7fc3e560b1dad4b
 
 class VotingController extends Controller
 {
@@ -78,8 +86,16 @@ class VotingController extends Controller
             'register_applications_appeals_for_votings'=>RegisterApplicationsAppealsForVoting::where('voting_id',$id)->get(),
             'register_registration_issuance_certified_copies'=>RegisterRegistrationIssuanceCertifiedCopy::where('voting_id',$id)->get(),
             'log_of_registration_of_PEC_decisions'=>LogRegistrationDecision::where('voting_id',$id)->get(),
+<<<<<<< HEAD
             'log_incoming_documents'=>LogIncomingDocument::where('voting_id',$id)->get(),
             'log_outgoing_documents'=>LogOutgoingPECDocumentsRegistration::where('voting_id',$id)->get(),
+=======
+<<<<<<< HEAD
+            'log_incoming_documents'=>LogIncomingDocument::where('voting_id',$id)->get(),
+            'log_outgoing_documents'=>LogOutgoingPECDocumentsRegistration::where('voting_id',$id)->get(),
+=======
+>>>>>>> 424386cfa9fc2585fd7fa33671fe4f14418ecbed
+>>>>>>> 9f4a4572bc5a7fa36639a31fc7fc3e560b1dad4b
         ]);
     }
 
@@ -136,9 +152,19 @@ class VotingController extends Controller
         RegisterApplicationsAppealsForVoting::create(['voting_id'=>$voting->id,]);
         RegisterRegistrationIssuanceCertifiedCopy::create(['voting_id'=>$voting->id,]);
         LogRegistrationDecision::create(['voting_id'=>$voting->id,]);
+<<<<<<< HEAD
         LogIncomingDocument::create(['voting_id'=>$voting->id,]);
         LogOutgoingPECDocumentsRegistration::create(['voting_id'=>$voting->id,]);
         
+=======
+<<<<<<< HEAD
+        LogIncomingDocument::create(['voting_id'=>$voting->id,]);
+        LogOutgoingPECDocumentsRegistration::create(['voting_id'=>$voting->id,]);
+        
+=======
+
+>>>>>>> 424386cfa9fc2585fd7fa33671fe4f14418ecbed
+>>>>>>> 9f4a4572bc5a7fa36639a31fc7fc3e560b1dad4b
         $voting->workers()->attach([$chairman->id,$vice_chairman->id,$secretary->id]);
 
         if($request['workers'][0]){
